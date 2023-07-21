@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- LinearLayout is used as the root layout for the UI. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,60 +9,55 @@
     android:orientation="vertical"
     tools:context=".CreateModify"
     android:padding="10dp">
-
-
-<FrameLayout
-    android:layout_width="wrap_content"
-    android:layout_gravity="center"
-    android:layout_height="wrap_content">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="120dp"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="100dp"
-        android:layout_height="120dp">
-
-        <ImageView
-            android:id="@+id/imgview"
+    <!-- FrameLayout contains two CardView elements side by side. -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+        <!-- CardView for displaying the contact's profile image. -->
+        <androidx.cardview.widget.CardView
             android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:scaleType="fitXY"
-            android:background="#c0c0c0"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_baseline_person_outline_24"/>
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/add_img"
-        android:layout_width="40dp"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="100dp"
-        android:layout_gravity="bottom|end"
-        android:layout_height="40dp">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="#00C0C0C0"
-            android:src="@drawable/ic_outline_add_a_photo_24"/>
-
-    </androidx.cardview.widget.CardView>
-</FrameLayout>
-
-
+            android:layout_margin="20dp"
+            app:cardCornerRadius="100dp"
+            android:layout_height="120dp">
+            <!-- ImageView for the contact's profile image. -->
+            <ImageView
+                android:id="@+id/imgview"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="fitXY"
+                android:background="#c0c0c0"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_baseline_person_outline_24"/>
+        </androidx.cardview.widget.CardView>
+        <!-- CardView for adding a new profile image. -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_img"
+            android:layout_width="40dp"
+            android:layout_margin="20dp"
+            app:cardCornerRadius="100dp"
+            android:layout_gravity="bottom|end"
+            android:layout_height="40dp">
+            <!-- View to create the circular background for the add photo icon. -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+            <!-- ImageView for the add photo icon. -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#00C0C0C0"
+                android:src="@drawable/ic_outline_add_a_photo_24"/>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+    <!-- TextInputLayout for the first name. -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps">
-
+        <!-- EditText for entering the first name. -->
         <EditText
             android:id="@+id/first_name"
             android:layout_width="match_parent"
@@ -71,12 +68,12 @@
             tools:ignore="TextFields"
             android:background="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
-
+    <!-- TextInputLayout for the last name. -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps">
-
+        <!-- EditText for entering the last name. -->
         <EditText
             android:id="@+id/last_name"
             android:layout_width="match_parent"
@@ -87,11 +84,12 @@
             tools:ignore="TextFields"
             android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
+    <!-- TextInputLayout for the contact number. -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps">
-
+        <!-- EditText for entering the contact number. -->
         <EditText
             android:id="@+id/contact_number"
             android:layout_width="match_parent"
@@ -101,12 +99,12 @@
             tools:ignore="TextFields"
             android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
-
+    <!-- TextInputLayout for the email. -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps">
-
+        <!-- EditText for entering the email. -->
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
@@ -116,12 +114,12 @@
             tools:ignore="TextFields"
             android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
-
+    <!-- TextInputLayout for the address. -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-smallcaps">
-
+        <!-- EditText for entering the address. -->
         <EditText
             android:id="@+id/address"
             android:layout_width="match_parent"
@@ -131,11 +129,11 @@
             tools:ignore="TextFields"
             android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
-
+    <!-- Space for vertical spacing. -->
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
-
+    <!-- Button for saving contact information. -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
         android:layout_width="fill_parent"
@@ -144,7 +142,7 @@
         android:text="@string/save_text"
         android:background="@color/pink"
         android:textColor="@color/white"/>
-
+    <!-- Button for deleting contact (initially invisible). -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_delete"
         android:layout_width="fill_parent"
@@ -154,5 +152,4 @@
         android:text="@string/delete_text"
         android:background="@color/pink"
         android:textColor="@color/white"/>
-
-</LinearLayout>  
+</LinearLayout>
