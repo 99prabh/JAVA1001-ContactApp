@@ -1,34 +1,30 @@
 package com.example.contactapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.appcompat.app.AppCompatActivity
+import com.example.contactapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    //Creating Variables
-    private var fab: FloatingActionButton? = null
+    // Creating Variable
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        //Initializing floating action button view
-        fab = findViewById<FloatingActionButton>(R.id.fab)
-
-        //send to AddorEditActivity when clicked on the floating action button
-        fab?.setOnClickListener {
-            val i = Intent(applicationContext, CreateModify::class.java)
-            startActivity(i)
+        // Set click listener for the floating action button to navigate to CreateModify activity
+        binding.fab.setOnClickListener {
+            startActivity(Intent(this, CreateModify::class.java))
         }
     }
 
-    //Crating the option menu to delete all the item at once
+    // Creating the option menu to delete all the item at once
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
-
 }
