@@ -43,7 +43,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#B5B9FFF7"/>
+            android:background="@color/white"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -65,10 +65,11 @@
             android:id="@+id/first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="First Name"
+            android:hint="@string/first_name"
             android:inputType="text"
             android:textAllCaps="false"
-            tools:ignore="TextFields" />
+            tools:ignore="TextFields"
+            android:background="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -80,10 +81,11 @@
             android:id="@+id/last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Last Name"
+            android:hint="@string/last_name"
             android:textAllCaps="false"
             android:inputType="text"
-            tools:ignore="TextFields" />
+            tools:ignore="TextFields"
+            android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -94,9 +96,10 @@
             android:id="@+id/contact_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contact Number"
+            android:hint="@string/contact_number"
             android:inputType="number"
-            tools:ignore="TextFields" />
+            tools:ignore="TextFields"
+            android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -108,9 +111,10 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="E-mail"
+            android:hint="@string/e_mail"
             android:inputType="textEmailAddress"
-            tools:ignore="TextFields" />
+            tools:ignore="TextFields"
+            android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -122,9 +126,10 @@
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Address"
+            android:hint="@string/address"
             android:inputType="text"
-            tools:ignore="TextFields" />
+            tools:ignore="TextFields"
+            android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Space
@@ -136,7 +141,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:text="Save"/>
+        android:text="@string/save_text"
+        android:background="@color/pink"
+        android:textColor="@color/white"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_delete"
@@ -144,6 +151,8 @@
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:visibility="invisible"
-        android:text="Delete" />
+        android:text="@string/delete_text"
+        android:background="@color/pink"
+        android:textColor="@color/white"/>
 
 </LinearLayout>  
