@@ -8,22 +8,26 @@ import com.example.contactapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // Creating Variable
+    // Variable for View Binding
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Inflate the layout using View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Set click listener for the floating action button to navigate to CreateModify activity
         binding.fab.setOnClickListener {
+            // Start the CreateModify activity when the floating action button is clicked
             startActivity(Intent(this, CreateModify::class.java))
         }
     }
 
-    // Creating the option menu to delete all the item at once
+    // Create the options menu (to delete all items at once)
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the main_menu XML file to create the options menu
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
