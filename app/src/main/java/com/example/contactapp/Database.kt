@@ -65,7 +65,58 @@ class Database(context: Context) : SQLiteOpenHelper(context, Database.DB_NAME, n
         return contactList
     }
 
+    //editing the existing contact
+    fun updateContact(contact: Model): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(FIRSTNAME, contact.first_name)
+        values.put(LASTNAME, contact.last_name)
+        values.put(CONTACT, contact.contact_number)
+        values.put(EMAIL, contact.email)
+        values.put(ADDRESS, contact.address)
+        values.put(PROFILE_IMAGE, contact.byteArray)
+        val _success = db.update(TABLE_NAME, values, ID + "=?", arrayOf(contact.id.toString())).toLong()
+        db.close()
+        return Integer.parseInt("$_success") != -1
+    }
 
+    //deleting the contact by its id
+    fun deleteContact(_id: Int): Boolean {
+        val db = this.writableDatabase
+        val _success = db.delete(TABLE_NAME, ID + "=?", arrayOf(_id.toString())).toLong()
+        db.close()
+        return Integer.parseInt("$_success") != -1
+    }
+
+    //deleting all the contacts
+    fun deleteAllContact(): Boolean {
+        val db = this.writableDatabase
+        val _success = db.delete(TABLE_NAME, null, null).toLong()
+        db.close()
+        return Integer.parseInt("$_success") != -1
+    }
+
+
+    @SuppressLint("Range")
+    //get the contact by its id from the database
+    fun getContact(_id: Int): Model {
+        val contact = Model()
+        val db = writableDatabase
+        val selectQuery = "SELECT  * FROM $TABLE_NAME WHERE $ID = $_id"
+        val cursor = db.rawQuery(selectQuery, null)
+
+        cursor?.moveToFirst()
+        contact.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID)))
+        contact.first_name = cursor.getString(cursor.getColumnIndex(FIRSTNAME))
+        contact.last_name = cursor.getString(cursor.getColumnIndex(LASTNAME))
+        contact.contact_number = cursor.getString(cursor.getColumnIndex(CONTACT))
+        contact.email = cursor.getString(cursor.getColumnIndex(EMAIL))
+        contact.address = cursor.getString(cursor.getColumnIndex(ADDRESS))
+        contact.byteArray = cursor.getBlob(cursor.getColumnIndex(PROFILE_IMAGE))
+
+        cursor.close()
+        return contact
+    }
 
     //creating all the required variables
     companion object {
