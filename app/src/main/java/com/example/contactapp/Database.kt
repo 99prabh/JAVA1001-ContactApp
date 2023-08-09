@@ -118,6 +118,33 @@ class Database(context: Context) : SQLiteOpenHelper(context, Database.DB_NAME, n
         return contact
     }
 
+    fun getSearchContact(query: String): List<Model> {
+        val contactList = mutableListOf<Model>()
+
+        val db = this.readableDatabase
+        val queryToSearch = "SELECT * FROM $TABLE_NAME WHERE $FIRSTNAME LIKE '%$query%' OR $LASTNAME LIKE '%$query%' OR $CONTACT LIKE '%$query%' OR $EMAIL LIKE '%$query%' OR $ADDRESS LIKE '%$query%'"
+        val cursor = db.rawQuery(queryToSearch, null)
+
+        while (cursor.moveToNext()) {
+            val contact = Model()
+            contact.id = cursor.getInt(cursor.getColumnIndex(ID))
+            contact.first_name = cursor.getString(cursor.getColumnIndex(FIRSTNAME))
+            contact.last_name = cursor.getString(cursor.getColumnIndex(LASTNAME))
+            contact.contact_number = cursor.getString(cursor.getColumnIndex(CONTACT))
+            contact.email = cursor.getString(cursor.getColumnIndex(EMAIL))
+            contact.address = cursor.getString(cursor.getColumnIndex(ADDRESS))
+            contact.byteArray = cursor.getBlob(cursor.getColumnIndex(PROFILE_IMAGE))
+
+            contactList.add(contact)
+        }
+
+        cursor.close()
+        db.close()
+
+        return contactList
+    }
+
+
     //creating all the required variables
     companion object {
         private const val DB_VERSION = 1
