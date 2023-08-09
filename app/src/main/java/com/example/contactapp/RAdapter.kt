@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapp.databinding.RvItemsBinding
 
-class RAdapter(private val contactList: List<Model>, private val context: Context) : RecyclerView.Adapter<RAdapter.ContactViewHolder>() {
+class RAdapter(private var contactList: List<Model>, private val context: Context) : RecyclerView.Adapter<RAdapter.ContactViewHolder>() {
 
     //view holder to set the xml file
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -45,6 +45,10 @@ class RAdapter(private val contactList: List<Model>, private val context: Contex
     //getting the item count on the list
     override fun getItemCount(): Int {
         return contactList.size
+    }
+    fun updateContacts(newContactList: List<Model>) {
+        contactList = newContactList
+        notifyDataSetChanged()
     }
 
     //initializing the view holder
