@@ -74,6 +74,27 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+
+    // If the delete icon is pressed, show a confirmation dialog
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == R.id.action_delete) {
+            // If "YES" is clicked on the dialog, delete all contacts; otherwise dismiss the dialog
+            AlertDialog.Builder(this).setTitle("Info").setMessage("Click 'YES' to Delete All Contacts")
+                .setPositiveButton("YES") { dialog, _ ->
+                    dbHandler.deleteAllContact()
+                    listcontacts = emptyList() // Clear the listcontacts
+                    rAdapter.updateContacts(listcontacts) // Update the adapter with empty list
+                    dialog.dismiss()
+                }
+                .setNegativeButton("NO") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
     private fun resetContactList() {
         listcontacts = dbHandler.contact()
         rAdapter.updateContacts(listcontacts)
@@ -89,4 +110,13 @@ class MainActivity : AppCompatActivity() {
         rAdapter.updateContacts(matchingContacts)
     }
 
+
+    // Re-initialize the database and update the contact list when the activity resumes
+    override fun onResume() {
+        super.onResume()
+        dbHandler = Database(this)
+        listcontacts = dbHandler.contact()
+        rAdapter = RAdapter(contactList = listcontacts, context = applicationContext)
+        contentBinding.recyclerView.adapter = rAdapter
+    }
 }
