@@ -58,6 +58,68 @@ class CreateModify : AppCompatActivity() {
 
         }
 
+        //Perform different button click operations
+        // this will save the data to the database also check if any data is null or not
+        binding.btnSave.setOnClickListener {
+            var success: Boolean = false
+            val stream = ByteArrayOutputStream()
+
+            // Checking if photo is null before compressing and saving it
+            photo?.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            if(stream.size()==0){
+                Toast.makeText(this, "Image is Required",Toast.LENGTH_SHORT).show()
+            }else if(binding.firstName.text.toString().length==0||binding.lastName.text.toString().length==0||binding.contactNumber.text.toString().length==0||binding.email?.text.toString().length==0||binding.address?.text.toString().length==0){
+                Toast.makeText(this, "All Fields Are Required",Toast.LENGTH_SHORT).show()
+            }else{
+                if (stream.toByteArray().size / ONE_MB_TO_KB > PREFERRED_IMAGE_SIZE) {
+                    Toast.makeText(this, "Image Size has to be less then 1MB",Toast.LENGTH_SHORT).show()
+                }else{
+                    if (!isEditMode) {
+                        val contact: Model = Model()
+                        contact.first_name = binding.firstName.text.toString()
+                        contact.last_name = binding.lastName.text.toString()
+                        contact.contact_number = binding.contactNumber.text.toString()
+                        contact.email = binding.email.text.toString()
+                        contact.address = binding.address.text.toString()
+                        contact.byteArray = stream.toByteArray()
+                        success = dbHandler?.addContact(contact) as Boolean
+                    } else {
+                        val contact: Model = Model()
+                        contact.id = intent.getIntExtra("Id", 0)
+                        contact.first_name = binding.firstName.text.toString()
+                        contact.last_name = binding.lastName.text.toString()
+                        contact.contact_number = binding.contactNumber.text.toString()
+                        contact.email = binding.email.text.toString()
+                        contact.address = binding.address.text.toString()
+                        contact.byteArray = stream.toByteArray()
+                        success = dbHandler?.updateContact(contact) as Boolean
+                    }
+                }
+            }
+            if (success)
+                finish()
+        }
+        //this will delete the current contact from database with a conformation dialog
+        binding.btnDelete.setOnClickListener {
+            val dialog = AlertDialog.Builder(this).setTitle("Info")
+                .setMessage("Click 'YES' Delete the Contact.")
+                .setPositiveButton("YES") { dialog, i ->
+                    val success = dbHandler?.deleteContact(intent.getIntExtra("Id", 0)) as Boolean
+                    if (success)
+                        finish()
+                    dialog.dismiss()
+                }
+                .setNegativeButton("NO") { dialog, i ->
+                    dialog.dismiss()
+                }
+            dialog.show()
+        }
+
+        //this will pick image and open the gallery
+        binding.addImg.setOnClickListener {
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, pickImage)
+        }
     }
 
 
