@@ -130,8 +130,13 @@ class CreateModify : AppCompatActivity() {
             imageUri = data?.data
             binding.imgview.setImageURI(imageUri)
             photo = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
+        } else if (resultCode == RESULT_CANCELED && requestCode == pickImage) {
+            // Use a default image when no image is selected
+            binding.imgview.setImageResource(R.drawable.default_image) // Replace with your default image resource ID
+            photo = BitmapFactory.decodeResource(resources, R.drawable.default_image) // Replace with your default image resource ID
         }
     }
+
 
     //menu to send back to the mainactivity
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
